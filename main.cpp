@@ -9,11 +9,14 @@ int main(int argc, char** argv) {
   int dado;
  
   FilaPrioridade *fila = new FilaPrioridade();
-  while (cin >> prioridade) {
-	cin >> dado;
-    fila->inserir(prioridade, dado);
-    
+
+  
+  while (cin >> prioridade)  {
+
+	    cin >> dado;
+      fila->inserir(prioridade, dado);
   }
+  
   
   fila->print();
   std::cout << std::endl;

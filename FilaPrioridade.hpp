@@ -19,6 +19,8 @@ class FilaPrioridade {
      */
     void inserir(int prioridade, int dado);
 
+    void inserirNoFinal(int prioridade, int dado);
+
     /** Essa função remove o primeiro nó da lista (pois é o de maior prioridade (menor inteiro)), e retorna o valor do dado armazenado no nó.
        @retorna a prioridade do primeiro nó da lista.
      */
@@ -56,8 +58,8 @@ class FilaPrioridade {
 
   private:
 
-    No* cabeca; /// Ponteiro para o primeiro elemento da lista (as vezes chamado de cabeça) 
-    No* fim;
+    No* cabeca; // Ponteiro para o primeiro elemento da lista (as vezes chamado de cabeça) 
+    No* ultimo; // Ponteiro para o ultimo elemento da lista
 
  	  int tamanho;
 };
