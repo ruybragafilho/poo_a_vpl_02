@@ -1,0 +1,162 @@
+VPL 2 - Fila de Prioridades (5,0 pts)
+Disponível a partir de: terça, 24 Nov 2020, 00:00
+Data de entrega: terça, 9 Fev 2021, 23:59
+Arquivos requeridos: main.cpp, FilaPrioridade.cpp, FilaPrioridade.hpp, No.cpp, No.hpp (Baixar)
+Tamanho máximo de arquivo carregado: 1 MiB
+Tipo de trabalho: Trabalho individual
+Neste exercício você deverá completar as classes FilaPrioridade e No. Como o próprio nome diz, a classe FilaPrioridade representa uma fila de prioridade de dados. Ela funciona da mesma forma que uma fila de impressão ou a fila do banco, onde indivíduos de prioridade 1 (prioridade mais alta) entram no início da fila e indivíduos de prioridade menor que aqueles que já estão na fila entram no final. 
+Cada célula dessa fila é uma instância da classe Nó:
+
+class No {
+  private:
+    int _dado;
+    No * _proximo;
+    int _prioridade;
+  public:
+    No(int prioridade, int dado, No* proximo);
+    
+    /** Seta o próximo nó.
+     */
+    void setProximo(No *next);
+    /** Retorna o próximo nó.
+     */
+    No* getProximo();
+    
+    /** Retorna o dado armazenado no nó.
+       @retorna um inteiro.
+     */
+    int getDado();
+    /** Seta o valor do dado que será armazenado no nó.
+     */
+    void setDado(int dado);
+    
+    /** Retorna o valor da prioridade do nó.
+     */
+    int getPrioridade();
+    /** Seta o valor da prioridade do nó.
+     */
+    void setPrioridade(int prioridade);
+};
+
+Parte da implementação da classe FilaPrioridade é dada abaixo:
+
+class FilaPrioridade {
+  public:
+    FilaPrioridade();
+
+    /** Essa função insere um elemento na lista de prioridades, onde a prioridade define a posição de do elemento na fila.
+     * O nó com maior prioridade é o primeiro da lista, o de segunda maior prioridade o segundo, e assim sucessivamente.
+     * Maior prioridade significa menor inteiro (um dado com atributo prioridade 1 vem antes de um dado com atributo prioridade 2)
+     * O segundo parâmetro - dado - é a informação armazenada no nó.
+     */
+    void inserir(int prioridade, int dado);
+    /** Essa função remove o primeiro nó da lista (pois é o de maior prioridade (menor inteiro)), e retorna o valor do dado armazenado no nó.
+       @retorna a prioridade do primeiro nó da lista.
+     */
+    int remover();
+    /** Esse método indica se a lista está vazia.
+       @retorna verdadeiro se a lista está vazia, e falso caso contrário.
+     */
+    int estaVazio();
+    /** Informa o número de elementos da lista.
+       @retorna um inteiro n, onde n é o número de nós da lista.
+     */
+    unsigned getTamanho();
+    /** Retorna o dado do nó que está no meio da lista.
+     * Se a lista possui 2*n ou 2*n + 1 elementos, então o elemento do meio é
+     * o que está no índice n, assumindo que o primeiro índice é 0.
+       @retorna o elemento do meio da lista.
+     */
+    int getMeio();
+    /** Retorna o dado do nó do último elemento da lista (o nó com menor prioridade (maior inteiro)).
+       @retorna o inteiro armazenado no último nó da lista.
+     */
+    int getUltimo();
+    /** Esse método insere um nó com o dado passado como parâmetro na primeira posição da fila.
+     * Uma forma simples de furar a fila é criar um valor de prioridade maior do que a prioridade da cabeça da fila;
+     */
+    void furaFila(int dado);
+    void print();
+  private:
+    No *cabeca; /// Ponteiro para o primeiro elemento da lista (as vezes chamado de cabeça)
+    int tamanho;
+};
+
+Você deverá completar todas as funções que possuem declaração mais não possuem corpo.
+Fique à vontade para criar funções auxiliares (e privadas) e atributos dentro das classes FilaPrioridade e No.
+DICA: O uso de um atributo fim, que é um ponteiro para o fim da fila, facilita muito a implementação.
+Se você tiver dúvidas de como começar, veja os dois slides logo abaixo do VPL no Moodle.
+Tenha em mente que o principal objetivo desse exercício é aplicar o princípio de encapsulamento.
+Você deve enviar os arquivos .cpp e .hpp para as classes FilaPrioridade e Node e o arquivo main.cpp. Para testar sua implementação, utilize a função main abaixo:
+
+int main(int argc, char** argv) {
+  int prioridade;
+  int dado;
+ 
+  FilaPrioridade *fila = new FilaPrioridade();
+  while (cin >> prioridade) {
+    cin >> dado;
+    fila->inserir(prioridade, dado);
+    
+  }
+ 
+  fila->print();
+  std::cout << std::endl;
+  std::cout << "s:" << fila->getTamanho() << ", ";
+  std::cout << "m:" << fila->getMeio() << ", ";
+  std::cout << "u:" << fila->getUltimo() << ", ";
+  std::cout << "r:" << fila->remover() << ", ";
+  std::cout << "m:" << fila->getMeio() << ", ";
+  std::cout << "u:" << fila->getUltimo() << ", ";
+  fila->furaFila(7);
+  std::cout << "m:" << fila->getMeio() << ", ";
+  std::cout << "u:" << fila->getUltimo() << std::endl;
+  fila->print();
+  return 0;
+}
+Veja que o main faz a leitura da entrada, cria uma fila e mostra os resultados da aplicação de algumas operações da classe que representa a fila.
+
+A entrada é composta por várias linhas, onde o primeiro valor da linha é o valor da prioridade e o segundo elemento é o dado que tem essa prioridade.
+Note que a fila de prioridades deve ser criada respeitando a ordem das prioridades.
+
+No caso de já existir um indivíduo com mesma prioridade na fila, o novo indivíduo deve vir após
+o indivíduo de igual prioridade e antes do indivíduo de menor prioridade.
+
+Alguns exemplos de entrada e saída:
+
+Entrada:
+1 2
+5 8
+2 5
+6 6
+Saída:
+2 5 8 6
+s:4, m:8, u:6, r:2, m:8, u:6, m:8, u:6
+7 5 8 6
+
+
+Entrada:
+2 3
+23 29
+11 13
+17 19
+5 7
+31 37
+2 6
+
+Saída:
+3 6 7 13 19 29 37
+s:7, m:13, u:37, r:3, m:19, u:37, m:13, u:37
+7 6 7 13 19 29 37
+
+Nesse exemplo abaixo tem-se a saída para o caso em que há prioridades iguais (veja que o dado 3 vem antes na fila que o dado 2)
+pois foi inserido primeiramente
+
+Entrada:
+1 3
+1 2
+
+Saída
+3 2
+s:2, m:2, u:2, r:3, m:2, u:2, m:2, u:2
+7 2
