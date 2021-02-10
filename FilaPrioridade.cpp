@@ -37,10 +37,10 @@ void FilaPrioridade::inserir(int prioridade, int dado)  {
         aux->setProximo( new No( aux->getPrioridade(), aux->getDado(), aux->getProximo() ) );      
         aux->setPrioridade( prioridade );
         aux->setDado( dado );
-    
-        ++(this->tamanho);
-
+        
         if( aux == this->ultimo ) this->ultimo = aux->getProximo();
+
+        ++(this->tamanho);        
 
     } else {
 
@@ -106,7 +106,7 @@ int FilaPrioridade::getMeio()  {
     if( this->tamanho > 0 )  {
 
         No* aux = this->cabeca;
-        int meio = (this->tamanho / 2)+1;
+        int meio = (this->tamanho / 2) + 1;
     
      
         for( int i = 0;  i < meio;  ++i )  {
